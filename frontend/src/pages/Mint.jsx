@@ -1,16 +1,11 @@
 import { useAccount } from "wagmi";
 import { constants } from "../constants";
-import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { useClaimNFT } from "@thirdweb-dev/react";
-import { ethers } from "ethers";
-
-const provider = new ethers.providers.Web3Provider(window.ethereum);
-const signer = provider.getSigner();
-const sdk = ThirdwebSDK.fromSigner(signer, "goerli");
+import { useSDK } from "../hooks/useSDK";
 
 function Mint({ isMember }) {
   const { address, isConnected } = useAccount();
-  const contract = sdk.getEditionDrop(constants.NFT_MEMBERSHIP_NFT_ADDRESS);
+  const { contract } = useSDK();
   const claimNFT = useClaimNFT(contract);
 
   const mint = async () => {

@@ -6,21 +6,13 @@ import Proposals from "./pages/Proposals";
 import Haru from "./pages/Haru";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
-import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { useOwnedNFTs } from "@thirdweb-dev/react";
-import { constants } from "./constants";
-import { ethers } from "ethers";
-
-const provider = new ethers.providers.Web3Provider((window as any).ethereum);
-const signer = provider.getSigner();
-const sdk = ThirdwebSDK.fromSigner(signer, "goerli");
-const contract = sdk.getEdition(constants.NFT_MEMBERSHIP_NFT_ADDRESS);
+import { useSDK } from "./hooks/useSDK";
 
 function App() {
   const { address, isConnected } = useAccount();
+  const { contract } = useSDK();
   const { data: ownedNFTs } = useOwnedNFTs(contract, address);
-  // const { data: totalCount } = useTotalCount(contract);
-  // const totalCountNumber = (totalCount as BigNumber)?.toNumber();
   const isMember = (ownedNFTs?.length as number) > 0;
 
   return (
