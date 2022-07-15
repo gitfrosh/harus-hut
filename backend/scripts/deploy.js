@@ -1,6 +1,6 @@
 const main = async () => {
-  const nftContractFactory = await hre.ethers.getContractFactory('Token');
-  const nftContract = await nftContractFactory.deploy();
+  const nftContractFactory = await hre.ethers.getContractFactory('HaruToken');
+  const nftContract = await nftContractFactory.deploy('0xC414729ef454bACC810E6417619880FfD4116585');
   await nftContract.deployed();
   console.log("Contract deployed to:", nftContract.address);
 };

@@ -5,15 +5,38 @@ import Members from "./pages/Members";
 import Proposals from "./pages/Proposals";
 import Haru from "./pages/Haru";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount } from "wagmi";
-import { useOwnedNFTs } from "@thirdweb-dev/react";
-import { useSDK } from "./hooks/useSDK";
+import { useAccount, useProvider, useContract } from "wagmi";
+import { constants } from "./constants";
+import { useEffect, useState } from "react";
+import Info from "./pages/Info";
 
 function App() {
   const { address, isConnected } = useAccount();
-  const { contract } = useSDK();
-  const { data: ownedNFTs } = useOwnedNFTs(contract, address);
-  const isMember = (ownedNFTs?.length as number) > 0;
+  const provider = useProvider();
+  const [members, setMembers] = useState([]);
+  const [isMember, setIsMember] = useState(false);
+
+  const contract = useContract({
+    addressOrName: constants.NFT_MEMBERSHIP_ADDRESS,
+    contractInterface: constants.NFT_MEMBERSHIP_ABI,
+    // @ts-ignore
+    provider,
+  });
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      const members = await contract.connect(provider).getAllMembers();
+      const memberAddresses = members.map((memberArray: any) => memberArray[0]);
+      setMembers(memberAddresses);
+      console.log(address);
+      const isMember = memberAddresses?.includes(address);
+      setIsMember(isMember);
+    };
+
+    if (contract && address) {
+      fetchMembers().catch(console.error);
+    }
+  }, [contract, address]);
 
   return (
     <div className="terminal">
@@ -68,14 +91,7 @@ function App() {
                     </a>
                   </li>
                   <li property="itemListElement" typeof="ListItem">
-                    <a
-                      href="/proposals"
-                      property="item"
-                      typeof="WebPage"
-                      className="menu-item"
-                    >
-                      <span property="name">Proposals</span>
-                    </a>
+                    <span property="name">Proposals</span>
                   </li>
                   <li property="itemListElement" typeof="ListItem">
                     <a
@@ -99,8 +115,9 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Home isMember={isMember} />} />
+              <Route path="/info" element={<Info />} />
               <Route path="/mint" element={<Mint isMember={isMember} />} />
-              <Route path="/members" element={<Members />} />
+              <Route path="/members" element={<Members members={members} />} />
               <Route path="/proposals" element={<Proposals />} />
               <Route path="/haru" element={<Haru />} />
               <Route path="*" element={<>Not found.</>} />

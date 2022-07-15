@@ -16,7 +16,7 @@ export const useSDK = () => {
 
   useEffect(() => {
     if (sdk) {
-      const edition = sdk.getEditionDrop(constants.NFT_MEMBERSHIP_NFT_ADDRESS);
+      const edition = sdk.getEditionDrop(constants.NFT_MEMBERSHIP_ADDRESS);
       setEdition(edition);
     }
   }, [sdk]);

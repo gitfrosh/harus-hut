@@ -6,21 +6,16 @@ import "terminal.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
-import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import App from "./App";
-import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [chain.goerli],
-  [
-    alchemyProvider({ alchemyId: "_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC" }),
-    publicProvider(),
-  ]
+  [chain.rinkeby],
+  [publicProvider()]
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "RainbowKit demo",
+  appName: "Haru's Hut",
   chains,
 });
 
@@ -39,9 +34,7 @@ root.render(
   <React.StrictMode>
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}>
-        <ThirdwebProvider desiredChainId={ChainId.Goerli}>
-          <App />
-        </ThirdwebProvider>
+        <App />
       </RainbowKitProvider>
     </WagmiConfig>
   </React.StrictMode>
