@@ -1,19 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useNetwork } from "wagmi";
 
 function MintMembership() {
-  return (
-    <section>
-      <div>
-        <em>
-          <strong>Ready to join Haru's Hut?</strong>
-          <br />
-          Being part of a DAO often starts with minting a membership NFT. Haru's
-          Hut works the same!
-        </em>
-        <br /> <br />
-      </div>
+  const { chain } = useNetwork();
+  console.log(chain);
 
+  const Button = () => {
+    if (chain?.id !== 80001) {
+      return (
+        <div className="terminal-alert terminal-alert-warning">
+          Please switch to Polygon Mumbai testnet first. :)
+        </div>
+      );
+    }
+    return (
       <div className="form-group">
         <Link to="/mint">
           <button className="btn btn-default btn-block">
@@ -21,6 +22,12 @@ function MintMembership() {
           </button>
         </Link>
       </div>
+    );
+  };
+
+  return (
+    <section>
+      <Button />
     </section>
   );
 }

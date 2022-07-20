@@ -6,8 +6,8 @@ import { ethers } from "ethers";
 function Haru() {
   const { data: signer } = useSigner();
   const contract = useContract({
-    addressOrName: constants.NFT_TOKEN_ADDRESS,
-    contractInterface: constants.NFT_TOKEN_ABI,
+    addressOrName: constants.TOKEN_ADDRESS,
+    contractInterface: constants.TOKEN_ABI,
   });
 
   const mint = async (event: any) => {
@@ -23,14 +23,14 @@ function Haru() {
 
   return (
     <section>
+      <hr />
       <h2 id="Proposals">Gimme $HARU</h2>
       <div style={{ textAlign: "center" }}>
         <p>
-          <em>Time is Galleons, little brother. </em>
+          <em>$HARU is the DAO's native token. Obtain them here!</em>
         </p>
       </div>
       <form onSubmit={mint}>
-        <legend>Yesss.</legend>
         <div className="form-group">
           <label htmlFor="text">Amount</label>
           <input

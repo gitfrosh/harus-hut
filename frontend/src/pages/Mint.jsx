@@ -1,4 +1,4 @@
-import { useContract, useSigner, useAccount } from "wagmi";
+import { useContract, useSigner, useNetwork, useAccount } from "wagmi";
 import { constants } from "../constants";
 import fleekStorage from "@fleekhq/fleek-storage-js";
 import { v4 as uuidv4 } from "uuid";
@@ -7,6 +7,7 @@ const baseURI = "https://ipfs.fleek.co/ipfs";
 const { REACT_APP_FLEEK_KEY, REACT_APP_FLEEK_SECRET } = process.env;
 
 function Mint({ isMember }) {
+  const { chain } = useNetwork();
   const { address, isConnected } = useAccount();
   const { data: signer } = useSigner();
 
@@ -54,22 +55,56 @@ function Mint({ isMember }) {
   };
 
   if (!isConnected || !address) {
-    return <section>Please connect your wallet first. </section>;
+    return (
+      <section>
+        <hr />
+        Please connect your wallet first.{" "}
+      </section>
+    );
   }
 
   if (isConnected && isMember) {
-    return <section>You are already member of the DAO! Congrats!</section>;
+    return (
+      <section>
+        <hr />
+        You are already member of the DAO! Congrats!
+      </section>
+    );
   }
 
-  return (
-    <section>
+  const Button = () => {
+    if (chain?.id !== 80001) {
+      return (
+        <div className="terminal-alert terminal-alert-error">
+          Please switch to Polygon Mumbai testnet first. :)
+        </div>
+      );
+    }
+    return (
       <button
-        className="btn btn-default"
+        className="btn btn-default btn-block"
         // disabled={isLoading}
         onClick={mint}
       >
         Mint!
       </button>
+    );
+  };
+
+  return (
+    <section>
+      <hr />
+      <div>
+        <em>
+          <header>
+            <h2>Ready to join Haru's Hut?</h2>
+          </header>
+          Being part of a DAO often starts with minting a membership NFT. Haru's
+          Hut works the same!
+        </em>
+        <br /> <br />
+      </div>
+      <Button />
     </section>
   );
 }

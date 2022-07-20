@@ -91,7 +91,14 @@ function App() {
                     </a>
                   </li>
                   <li property="itemListElement" typeof="ListItem">
-                    <span property="name">Proposals</span>
+                    <a
+                      href="/proposals"
+                      property="item"
+                      typeof="WebPage"
+                      className="menu-item"
+                    >
+                      <span property="propsals">Proposals</span>
+                    </a>{" "}
                   </li>
                   <li property="itemListElement" typeof="ListItem">
                     <a
@@ -127,21 +134,22 @@ function App() {
 
         <footer style={{ textAlign: "center", marginTop: "3rem" }}>
           <p>
-            This project is inspired by
+            Built with &hearts; during{" "}
             <a
-              href="https://egoist.sh/"
+              href="https://hackfs.com/"
               target="_blank"
               rel="noopener noreferer"
             >
-              @egoist's
+              ETH Global's HackFS hackathon
+            </a>{" "}
+            by{" "}
+            <a
+              href="https://github.com/gitfrosh"
+              target="_blank"
+              rel="noopener noreferer"
+            >
+              Rike
             </a>
-            work -
-            <a href="https://github.com/egoist/hack" rel="noopener noreferer">
-              hack.css
-            </a>
-          </p>
-          <p>
-            Version: 0.7.2 <a href="#menu">Top</a>
           </p>
         </footer>
       </div>

@@ -1,6 +1,6 @@
 export const constants = {
-    NFT_TOKEN_ADDRESS: "0xcEC72d4816c0cAFd623fbaeE78552a7F261eC6d4",
-    NFT_MEMBERSHIP_ADDRESS: "0xC414729ef454bACC810E6417619880FfD4116585",
+    TOKEN_ADDRESS: "0x01bc7bF4E49e94EC8CA1a40941765Eb2D94a6134",
+    NFT_MEMBERSHIP_ADDRESS: "0xa1AAed74e741f93cDF1aBbB285d384B5d43913a3",
     NFT_MEMBERSHIP_ABI: [
         {
             "inputs": [],
@@ -322,7 +322,13 @@ export const constants = {
                 }
             ],
             "name": "mintNFT",
-            "outputs": [],
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
         },
@@ -553,7 +559,7 @@ export const constants = {
             "type": "function"
         }
     ],
-    NFT_TOKEN_ABI: [
+    TOKEN_ABI: [
         {
             "inputs": [
                 {
@@ -966,5 +972,5 @@ export const constants = {
             "stateMutability": "payable",
             "type": "receive"
         }
-    ]
+    ],
 }

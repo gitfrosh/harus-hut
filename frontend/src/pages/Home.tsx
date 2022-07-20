@@ -4,6 +4,7 @@ import HelloMember from "../components/HelloMember";
 import MintMembership from "../components/MintMembership";
 import logo from "./../assets/haru-icon.png";
 import { useAccount } from "wagmi";
+import { Link } from "react-router-dom";
 
 function Home({ isMember }: any) {
   const { isConnected } = useAccount();
@@ -39,25 +40,43 @@ function Home({ isMember }: any) {
             <summary>
               <strong>What is a DAO?</strong>
             </summary>
-            <div>Nothing special, I think you're pretty cool.</div>
+            <div>
+              In Web3, community is key. With DAOs (Decentralized autonomous
+              organisations) like-minded people come together and build a space
+              to think, work and decide on a common purpose. It is an
+              organisation without central leadership.
+            </div>
           </details>
           <details>
             <summary>
               <strong>Why should you join one?</strong>
             </summary>
-            <div>Nothing special, I think you're pretty cool.</div>
+            <div>
+              DAOs are an excellent space to meet united people and try out new
+              forms of collaborations.
+            </div>
           </details>
           <details>
             <summary>
               <strong>Why should you join Haru's Hut?</strong>
             </summary>
-            <div>Nothing special, I think you're pretty cool.</div>
+            <div>
+              DAOs usually build a treasury and act on real cryptocurrencies to
+              make a difference (funding, donating, contracting, ..). Within
+              Haru's Hut we don't use "real" Ether, because it is made purely
+              for educational purposes.
+            </div>
           </details>{" "}
           <details>
             <summary>
               <strong>How can it be for free? Must be a scam!!</strong>
             </summary>
-            <div>Nothing special, I think you're pretty cool.</div>
+            <div>
+              In the Blockchain world, we have the possibility to build
+              decentralized applications and smart contracts on testnets.
+              Testnet coins don't have value and can be obtained from faucets -
+              that makes Haru's Hut free of charge.
+            </div>
           </details>
           <details>
             <summary>
@@ -69,7 +88,28 @@ function Home({ isMember }: any) {
       </section>
       <hr />
       <Connect />
-      {isConnected && !isMember ? <MintMembership /> : null}
+
+      {isConnected && !isMember ? (
+        <>
+          <div>
+            <em>
+              <p>
+                <strong>Ready to join Haru's Hut?</strong>
+              </p>
+              Being part of a DAO often starts with minting a membership NFT.
+              Haru's Hut works the same! Connect your Web wallet (e.g. Metamask)
+              and go to the <Link to="/mint">minting page</Link>, please.
+            </em>
+            <br /> <br />
+          </div>
+          <MintMembership />
+          <div className="terminal-alert terminal-alert-error">
+            That's scary! I need more info! :({" "}
+            <Link to="/info">-- alrighty, we got you covered</Link>.
+          </div>
+        </>
+      ) : null}
+
       {isConnected && isMember ? <HelloMember /> : null}
       <hr />
     </div>

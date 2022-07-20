@@ -10,12 +10,15 @@ function Proposals() {
 
   return (
     <section>
+      <hr />
       <h2 id="Tables">DAO Proposals</h2>
       <div style={{ textAlign: "center" }}>
-          <p>
-          <em>It does not do to dwell on dreams and forget to live.</em>
-
-          </p>
+        <p>
+          <em>
+            What to do with our treasury? Write a proposal or vote on existing
+            proposals.
+          </em>
+        </p>
 
         <button className="btn btn-primary btn-block">
           Create new proposal

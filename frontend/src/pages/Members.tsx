@@ -3,6 +3,7 @@ import React from "react";
 function Members({ members }: any) {
   return (
     <section>
+      <hr />
       <h2 id="Tables">Proud Haru's Hut members</h2>
 
       <table>

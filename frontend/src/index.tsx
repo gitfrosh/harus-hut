@@ -8,10 +8,11 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import App from "./App";
+import { alchemyProvider } from "wagmi/providers/alchemy";
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [chain.rinkeby],
-  [publicProvider()]
+  [chain.polygonMumbai],
+  [alchemyProvider(), publicProvider()]
 );
 
 const { connectors } = getDefaultWallets({
